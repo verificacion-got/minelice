@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Certificado - Ayuda Mineduc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reseteo básico y estilos generales para simular móvil */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 480px; /* Ancho típico de móvil */
+            margin: 0 auto;
+            background-color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- CABECERA --- */
+        .header {
+            padding: 15px 20px;
+            background: #fff;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+        .logo-blue { color: #0056b3; font-weight: normal; }
+        .logo-red { color: #d9534f; font-weight: bold; }
+
+        .page-title {
+            color: #0056b3;
+            font-size: 1.3rem;
+            margin: 5px 0 15px 0;
+            font-weight: normal;
+        }
+
+        .section-subtitle {
+            color: #0056b3;
+            font-size: 1.1rem;
+            margin: 0 0 15px 0;
+            font-weight: normal;
+        }
+
+        /* --- CAJAS VERDES DE ÉXITO --- */
+        .success-box, .alt-link-box {
+            background-color: #dff0d8; /* Verde claro fondo */
+            border: 1px solid #d6e9c6;
+            color: #3c763d; /* Verde oscuro texto */
+            padding: 15px;
+            margin: 0 15px 20px 15px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .success-box a {
+            color: #0056b3;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .instructions-text {
+            padding: 0 15px;
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* --- VISOR PDF OSCURO (PLACEHOLDER) --- */
+        .pdf-placeholder-container {
+            margin: 0 15px 20px 15px;
+            height: 450px; /* Altura fija para simular la pantalla */
+            background-color: #222222; /* Fondo gris muy oscuro */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #666;
+            position: relative;
+        }
+
+        /* Icono PDF simulado y texto getPdf */
+        .fake-pdf-icon {
+            font-size: 3rem;
+            opacity: 0.3;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .getpdf-text {
+            opacity: 0.5;
+            margin-bottom: 25px;
+        }
+
+        /* El botón "Abrir" azul claro */
+        .btn-abrir-placeholder {
+            background-color: #8ab4f8; /* Azul claro exacto */
+            color: #222;
+            text-decoration: none;
+            padding: 12px 40px;
+            border-radius: 25px; /* Bordes muy redondeados */
+            font-weight: 500;
+            font-size: 1rem;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .btn-abrir-placeholder:hover {
+             background-color: #7aa3e8;
+        }
+
+        /* --- CAJA INFERIOR Y BOTONES --- */
+        .alt-link-box {
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para los botones azul oscuro inferiores */
+        .btn-dark-blue {
+            background-color: #004a99;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .btn-dark-blue i {
+            margin-right: 8px;
+        }
+
+        /* Alineación específica del botón "Ver Copia" */
+        .alt-link-actions {
+            display: flex;
+            justify-content: flex-end; /* Alineado a la derecha */
+            margin-top: 10px;
+        }
+
+        /* Alineación específica del botón "Volver al Portal" */
+        .footer-actions {
+            padding: 0 15px 20px 15px;
+            display: flex;
+            justify-content: flex-end; /* Alineado a la derecha */
+        }
+        
+        .footer-simple-text {
+            padding: 20px 15px;
+            font-size: 0.9rem;
+            color: #777;
+            background: #f9f9f9;
+            margin-top: auto; /* Empuja el footer al final */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1 class="logo-text">
+                <span class="logo-blue">Ayuda</span><span class="logo-red">Mineduc</span>
+            </h1>
+            <h2 class="page-title">Certificados en tu Celular</h2>
+            <h3 class="section-subtitle">Validación de Certificado</h3>
+        </div>
+
+        <div class="success-box">
+            <p>El Ministerio de Educación confirma que el certificado en consulta es un documento válido y vigente.</p>
+            <a href="#">Ver más información</a>
+        </div>
+
+        <p class="instructions-text">
+            Verifique que el certificado presentado contenga la misma información que el documento que se muestra a continuación.
+        </p>
+
+        <div class="pdf-placeholder-container">
+            <div class="fake-pdf-icon">PDF</div>
+            <span class="getpdf-text">getPdf</span>
+            
+            <a href="TU_DOCUMENTO.pdf" class="btn-abrir-placeholder" target="_blank">
+                Abrir
+            </a>
+        </div>
+
+        <div class="alt-link-box">
+            <p>Si no puede ver el Certificado mas arriba, pinche aqui para abrir en una nueva ventana:</p>
+            <div class="alt-link-actions">
+                <button class="btn-dark-blue">
+                    <i class="fa-solid fa-file-lines"></i> Ver Copia
+                </button>
+            </div>
+        </div>
+
+        <div class="footer-actions">
+            <a href="#" class="btn-dark-blue home-btn">
+                <i class="fa-solid fa-house"></i> Volver al Portal
+            </a>
+        </div>
+        
+        <div class="footer-simple-text">
+            Ministerio de Educación
+        </div>
+
+    </div>
+
+</body>
+</html>
